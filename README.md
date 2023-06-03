@@ -1,34 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🫡 Welcome Aboard 
 
-## Getting Started
+This is the handbook for all teammates to contribute this project more efficiently.
 
-First, run the development server:
+Once you lost, come back to checkout any helpful.
+
+## Menu
+- [Set up development environment](#set-up-development-environment)
+- [Development Overview](#overview)
+
+---
+
+## Set up Development Environment
+
+This project uses docker development contianer to make sure all teammates have the same development environment and system configuration.
+
+**Tools:**
+
+* Visual Studio Code
+* Docker
+
+**Important:**
+
+please install `Dev Containers` plugin in the VSCode Extenstion Store.
+
+After the `Dev Container` plugin has been installed and `Docker` has started, reopen `VSCode`. Then, click the `Reopen in Container` option to start your development environment.
+
+Then you can use this cmd to start this project.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+# Overview
 
-## Learn More
+💡 Plan -> 💻 Implement <-> 🧪 Test -> 🎉 Done
 
-To learn more about Next.js, take a look at the following resources:
+## Before Coding
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **New Tickets**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+    Planning is crucial. Discuss your estimated timeline and your idea for implementing the new requirements with your teammates once you assigned a ticket.
 
-## Deploy on Vercel
+- **Package Management**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    If you want to install new packages, discuss your reasons with your teammates. Any new changes will undergo a code review.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Testing**
+
+    In our small team, we usually discuss new requirements together and assign two members to each new requirement. One person is responsible for the test cases, and the other for implementation.
+
+## Start Coding
+
+- **Create a new branch**
+
+    new branch name should be start with your name and end with the ticket name. 
+
+    **e.g.** `chenhuafan/complete_readme`.
+
+- **Development (TDD) and Test**
+    
+    In general, two developers are assigned to the same ticket, one as the Developer and another as the Tester.
+
+    1. New Requirement Team Meetings (Target, Roles) 
+    
+        Discuss the target of the new requirement and the roles of the Developer and Tester.
+    
+    2. Test Case Creation
+
+        The Tester will create a new development branch and start adding test cases.
+    
+    3. Implementation
+
+        The Developer will follow all the test cases to implement the functions.
+    
+    4. Code Review and Merging
+
+        Once all the functions are completed, please create a Pull Request (PR) and request a code review before merging into the Dev branch.
+
+## To Contribute
+
+- Once your PR passing code review and all auto test. your code will be merged into `Dev` branch. Then the ticket is **Done** 🎉.
+
+---
+
