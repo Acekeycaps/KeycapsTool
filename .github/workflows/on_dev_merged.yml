@@ -1,0 +1,17 @@
+name: Deploy Dev Branch
+
+on:
+  push:
+    branches:
+      - dev
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    container:
+      image: mcr.microsoft.com/devcontainers/typescript-node:0-18 # replace this with your docker image
+
+    steps:
+      - name: Say hello
+        run: echo Hello, world!
