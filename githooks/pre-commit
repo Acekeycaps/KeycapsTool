@@ -1,0 +1,18 @@
+#!/bin/bash
+
+# Get list of staged files
+staged_files=$(git diff --cached --name-only --diff-filter=d)
+
+if [[ ${#staged_files} -gt 0 ]]; then
+  # Run npm lint on staged files
+  echo "Running linter..."
+  output=$(npx eslint --quiet $staged_files)
+  status=$?
+
+  # If lint failed, exit with the status code
+  if [ $status -ne 0 ]; then
+    echo "Lint failed, please fix the errors before commit."
+    echo "$output"
+    exit 1
+  fi
+fi

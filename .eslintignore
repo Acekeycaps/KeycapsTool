@@ -1,4 +1,4 @@
-next.config.js
-jest.config.mjs
-tailwind.config.js
-postcss.config.js
+**.config.js
+**.json
+**.config.mjs
+githooks/
