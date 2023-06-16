@@ -1,7 +1,14 @@
-import TodoReducer from './reducer';
-import * as actionCreators from './actions';
+import { createSlice } from '@reduxjs/toolkit';
+import { initialState } from './store';
+import reducers from './reducer';
+
+const slice = createSlice({
+  name: 'core',
+  initialState,
+  reducers,
+});
 
 export default {
-  reducer: TodoReducer,
-  actionCreators: { ...actionCreators },
+  actions: slice.actions,
+  reducer: slice.reducer,
 };

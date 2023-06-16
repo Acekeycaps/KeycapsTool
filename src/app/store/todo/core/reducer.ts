@@ -1,51 +1,43 @@
-import { Reducer } from 'redux';
-import defaultTodoStore, { TodoCore } from './store';
+import { TodoCore } from './store';
 import {
-  ADD_TODO, DELETE_TODO, SET_TODOS, UPDATE_TODO,
-} from '../../actions.type';
-import {
-  AddTodoAction, DeleteTodoAction, SetTodosAction, UpdateTodoAction,
+  AddActionPayload, RemoveActionPayload, ResetActionPayload, UpdateActionPayload,
 } from './actions';
+import { ReducerDraft } from '../../actions.type';
 
-const TodoReducer: Reducer<
-TodoCore | undefined,
-AddTodoAction | DeleteTodoAction | UpdateTodoAction | SetTodosAction
-> = (state, action): TodoCore => {
-  if (state === undefined) {
-    return defaultTodoStore;
-  }
+type CoreReducerDraft<P> = ReducerDraft<TodoCore, P>;
 
-  if (action.type === ADD_TODO) {
-    const { todo } = action.payload;
-    return {
-      todos: state.todos.push(todo),
-    };
-  }
-
-  if (action.type === DELETE_TODO) {
-    const { todoId } = action.payload;
-    return {
-      ...state,
-      todos: state.todos.filter((todo) => todo.id !== todoId),
-    };
-  }
-
-  if (action.type === UPDATE_TODO) {
-    const { todo } = action.payload;
-    return {
-      ...state,
-      todos: state.todos.map((old) => (old.id === todo.id ? todo : old)),
-    };
-  }
-
-  if (action.type === SET_TODOS) {
-    return {
-      ...state,
-      todos: action.payload.todos,
-    };
-  }
-
-  return state;
+const add : CoreReducerDraft<AddActionPayload> = (state, action) => {
+  const { todo } = action.payload;
+  state.todos.set(todo.id, todo);
+  state.ids.push(todo.id);
 };
 
-export default TodoReducer;
+const remove: CoreReducerDraft<RemoveActionPayload> = (state, action) => {
+  const { todoId } = action.payload;
+  state.todos.delete(todoId);
+  state.ids = state.ids.filter((id) => id !== todoId);
+};
+
+const update: CoreReducerDraft<UpdateActionPayload> = (state, action) => {
+  const { todo } = action.payload;
+  if (!state.todos.has(todo.id)) {
+    state.ids.push(todo.id);
+  }
+  state.todos.set(todo.id, todo);
+};
+
+const reset: CoreReducerDraft<ResetActionPayload> = (state, action) => {
+  const { todos } = action.payload;
+  state.todos.clear();
+  state.ids = todos.map((todo) => todo.id);
+  todos.forEach((todo) => {
+    state.todos.set(todo.id, todo);
+  });
+};
+
+export default {
+  add,
+  remove,
+  update,
+  reset,
+};

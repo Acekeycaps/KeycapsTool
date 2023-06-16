@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-
 export type Todo = {
   'userId': number,
   'id': number,
@@ -8,11 +6,11 @@ export type Todo = {
 };
 
 export type TodoCore = {
-  todos: List<Todo>,
+  todos: Map<Todo['id'], Todo>,
+  ids: Array<Todo['id']>
 };
 
-const defaultTodoStore: TodoCore = {
-  todos: List(),
+export const initialState: TodoCore = {
+  todos: new Map(),
+  ids: [],
 };
-
-export default defaultTodoStore;

@@ -11,6 +11,7 @@
     "indent": [
       "error",
       2
-    ]
+    ],
+    "no-param-reassign": ["error", { "props": true, "ignorePropertyModificationsFor": ["state"] }]
   }
 }

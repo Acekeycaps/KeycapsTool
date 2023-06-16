@@ -1,19 +1,15 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import core from './core';
-import status from './status';
-import thunks from './thunks';
 
-const todoRootReducer = combineReducers({
-  // add children reducer here.
+const reducer = combineReducers({
   core: core.reducer,
-  status: status.reducer,
 });
 
+const actions = {
+  core: core.actions,
+};
+
 export default {
-  reducer: todoRootReducer,
-  actionCreators: {
-    ...core.actionCreators,
-    ...status.actionCreators,
-    ...thunks,
-  },
+  actions,
+  reducer,
 };

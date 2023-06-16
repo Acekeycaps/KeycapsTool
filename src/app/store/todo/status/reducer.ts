@@ -1,37 +1,18 @@
-import { Reducer } from 'redux';
-import defaultTodoStatus, { TodoStatus } from './store';
-import {
-  SET_TODO_LOADING, SET_TODO_ERROR,
-} from '../../actions.type';
-import {
-  SetTodoLoadingAction, SetTodoErrorAction,
-} from './actions';
+import { ReducerDraft } from '../../actions.type';
+import { SetErrorActionPayload, SetLoadingActionPayload } from './actions';
+import { TodoStatus } from './store';
 
-const reducer: Reducer<
-TodoStatus | undefined,
-SetTodoLoadingAction | SetTodoErrorAction
-> = (state, action): TodoStatus => {
-  if (state === undefined) {
-    return defaultTodoStatus;
-  }
+type StatusReducerDraft<P> = ReducerDraft<TodoStatus, P>;
 
-  if (action.type === SET_TODO_ERROR) {
-    const { error } = action.payload;
-    return {
-      ...state,
-      error,
-    };
-  }
-
-  if (action.type === SET_TODO_LOADING) {
-    const { loading } = action.payload;
-    return {
-      ...state,
-      loading,
-    };
-  }
-
-  return state;
+const setLoaading : StatusReducerDraft<SetLoadingActionPayload> = (state, action) => {
+  state.loading = action.payload.loading;
 };
 
-export default reducer;
+const setError: StatusReducerDraft<SetErrorActionPayload> = (state, action) => {
+  state.error = action.payload.error;
+};
+
+export default {
+  setLoaading,
+  setError,
+};

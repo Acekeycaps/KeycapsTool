@@ -1,3 +1,6 @@
+import { combineReducers } from '@reduxjs/toolkit';
+import todo from './todo';
+
 /**
 This is the root reducer of the redux
 
@@ -37,37 +40,18 @@ which also match the `store` structure
   E: data
 }
 
+For each module under the store, it should export reducer as default and export a nested actions
  */
-import {
-  applyMiddleware, bindActionCreators, combineReducers, createStore,
-} from 'redux';
-import thunk from 'redux-thunk';
-import logger from 'redux-logger';
-import { isDEV } from '@/utils/env';
-import todo from './todo';
 
-let middlewares;
-
-if (isDEV) {
-  middlewares = applyMiddleware(logger, thunk);
-} else {
-  middlewares = applyMiddleware(thunk);
-}
-
-const rootReducer = combineReducers({
-  // add children reducer here.
+const reducer = combineReducers({
   todo: todo.reducer,
 });
 
-export const store = createStore(rootReducer, middlewares);
-export type Store = typeof store;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+const actions = {
+  todo: todo.actions,
+};
 
-// bind children dispatch with actions creators here.
-export const dispatch = bindActionCreators(
-  {
-    ...todo.actionCreators,
-  },
-  store.dispatch,
-);
+export default {
+  actions,
+  reducer,
+};

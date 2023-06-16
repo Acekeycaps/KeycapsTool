@@ -1,49 +1,25 @@
-import { List } from 'immutable';
-import {
-  ADD_TODO, DELETE_TODO, SET_TODOS, SymbolAction, UPDATE_TODO,
-} from '../../actions.type';
+import { createAction } from '@reduxjs/toolkit';
 import { Todo } from './store';
+import {
+  ADD_TODO, DELETE_TODO, RESET_TODOS, UPDATE_TODO,
+} from '../../actions.type';
 
-export type AddTodoAction = SymbolAction<typeof ADD_TODO, {
+export type AddActionPayload = {
   todo: Todo
-}>;
+};
+export const add = createAction<AddActionPayload>(ADD_TODO);
 
-export const addTodoAction = (todo: Todo): AddTodoAction => ({
-  type: ADD_TODO,
-  payload: {
-    todo,
-  },
-});
+export type RemoveActionPayload = {
+  todoId: Todo['id']
+};
+export const remove = createAction<RemoveActionPayload>(DELETE_TODO);
 
-export type DeleteTodoAction = SymbolAction<typeof DELETE_TODO, {
-  todoId: Todo['id'];
-}>;
-
-export const deleteTodoAction = (todoId: number): DeleteTodoAction => ({
-  type: DELETE_TODO,
-  payload: {
-    todoId,
-  },
-});
-
-export type UpdateTodoAction = SymbolAction<typeof UPDATE_TODO, {
+export type UpdateActionPayload = {
   todo: Todo
-}>;
+};
+export const update = createAction<UpdateActionPayload>(UPDATE_TODO);
 
-export const updateTodoAction = (todo:Todo): UpdateTodoAction => ({
-  type: UPDATE_TODO,
-  payload: {
-    todo,
-  },
-});
-
-export type SetTodosAction = SymbolAction<typeof SET_TODOS, {
-  todos: List<Todo>
-}>;
-
-export const setTodosAction = (todos: List<Todo>): SetTodosAction => ({
-  type: SET_TODOS,
-  payload: {
-    todos,
-  },
-});
+export type ResetActionPayload = {
+  todos: Todo[]
+};
+export const reset = createAction<ResetActionPayload>(RESET_TODOS);
