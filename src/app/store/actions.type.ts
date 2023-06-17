@@ -1,6 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
-
-export type ReducerDraft<S, P> = (state: S, action: PayloadAction<P>) => void;
 // action types
 export const ADD_TODO = ('ADD_TODO');
 export const DELETE_TODO = ('DELETE_TODO');

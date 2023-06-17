@@ -1,18 +1,20 @@
-import { ReducerDraft } from '../../actions.type';
-import { SetErrorActionPayload, SetLoadingActionPayload } from './actions';
-import { TodoStatus } from './store';
+import { createReducer } from '@reduxjs/toolkit';
+import { setError, setLoading } from './actions';
+import { initialState } from './store';
 
-type StatusReducerDraft<P> = ReducerDraft<TodoStatus, P>;
+const setLoadingReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setLoading, (state, action) => {
+    state.loading = action.payload.loading;
+  });
+});
 
-const setLoaading : StatusReducerDraft<SetLoadingActionPayload> = (state, action) => {
-  state.loading = action.payload.loading;
-};
-
-const setError: StatusReducerDraft<SetErrorActionPayload> = (state, action) => {
-  state.error = action.payload.error;
-};
+const setErrorReducer = createReducer(initialState, (builder) => {
+  builder.addCase(setError, (state, action) => {
+    state.error = action.payload.error;
+  });
+});
 
 export default {
-  setLoaading,
-  setError,
+  setLoadingReducer,
+  setErrorReducer,
 };
