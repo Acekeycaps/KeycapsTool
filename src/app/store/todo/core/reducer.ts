@@ -1,8 +1,9 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { initialState } from './store';
 import {
-  add, remove, reset, update,
+  add, remove, update,
 } from './actions';
+import { FetchTodos } from '../thunks';
 
 // const add : CoreReducerDraft<AddActionPayload> = ;
 
@@ -32,8 +33,20 @@ const updateReducer = createReducer(initialState, (builder) => {
   });
 });
 
-const resetReducer = createReducer(initialState, (builder) => {
-  builder.addCase(reset, (state, action) => {
+// const resetReducer = createReducer(initialState, (builder) => {
+//   builder.addCase(reset, (state, action) => {
+//     const { todos } = action.payload;
+//     state.todos.clear();
+//     state.ids = todos.map((todo) => todo.id);
+//     todos.forEach((todo) => {
+//       state.todos.set(todo.id, todo);
+//     });
+//   });
+// });
+
+const fetchReducer = createReducer(initialState, (builder) => {
+  // when fulfiled
+  builder.addCase(FetchTodos.fulfilled, (state, action) => {
     const { todos } = action.payload;
     state.todos.clear();
     state.ids = todos.map((todo) => todo.id);
@@ -47,5 +60,5 @@ export default {
   addReducer,
   removeReducer,
   updateReducer,
-  resetReducer,
+  fetchReducer,
 };

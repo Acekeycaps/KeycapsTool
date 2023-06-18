@@ -1,9 +1,9 @@
 export type TodoStatus = {
   error?: Error,
-  loading: boolean
+  loading: 'fetching' | 'pending' | 'fulfiled'
 };
 
 export const initialState: TodoStatus = {
   error: undefined,
-  loading: false,
+  loading: 'fulfiled',
 };

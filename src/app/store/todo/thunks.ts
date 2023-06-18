@@ -1,36 +1,35 @@
-import { ThunkAction } from 'redux-thunk';
-import { CombinedState } from 'redux';
-import { List } from 'immutable';
-import {
-  SetTodoErrorAction, SetTodoLoadingAction, setTodoError, setTodoLoadingAction,
-} from './status/actions';
-import { Todo, TodoCore } from './core/store';
-import { TodoStatus } from './status/store';
-import { SymbolAction, FETCH_TODOS } from '../actions.type';
-import { SetTodosAction, setTodosAction } from './core/actions';
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { Todo } from './core/store';
+import { FETCH_TODOS } from '../actions.type';
 
-export type FetchTodo = SymbolAction<typeof FETCH_TODOS, void>;
-
-const fetchTodosAction = (): ThunkAction<
-void,
-CombinedState<TodoCore & TodoStatus>,
-unknown,
-SetTodoLoadingAction | SetTodoErrorAction | SetTodosAction
-> => async (dispatch) => {
-  try {
-    const todos = await fetch('https://jsonplaceholder.typicode.com/posts')
-      .then((data) => data.json())
-      .then((json: Array<Todo>) => List(json));
-    dispatch(setTodoLoadingAction(true));
-    dispatch(setTodosAction(todos));
-  } catch (err) {
-    // todo: unstable error handler.
-    dispatch(setTodoError(new Error('request failed')));
-  } finally {
-    dispatch(setTodoLoadingAction(false));
-  }
+export type FetchTodoFulfiledPayload = {
+  todos: Todo[]
 };
 
+export type FetchTodoRejectedPayload = {
+  err: Error
+};
+
+export const FetchTodos = createAsyncThunk<
+FetchTodoFulfiledPayload,
+void,
+{ rejectValue: FetchTodoRejectedPayload }
+>(
+  FETCH_TODOS,
+  async (_, { rejectWithValue }) => {
+    try {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+      const data = await response.json();
+      return { todos: data as Todo[] };
+    } catch (err) {
+      if (err instanceof Error) {
+        return rejectWithValue({ err });
+      }
+      return rejectWithValue({ err: new Error('Unknown error') });
+    }
+  },
+);
+
 export default {
-  fetchTodosAction,
+  FetchTodos,
 };
