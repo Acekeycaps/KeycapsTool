@@ -29,7 +29,6 @@ const reducer = createReducer(initialState, (builder) => {
   // when fulfiled
   builder.addCase(fetchTodos.fulfilled, (state, action) => {
     const { todos } = action.payload;
-    console.log('112233', todos);
     const tmpTodo: TodoCore['todos'] = {};
     state.ids = todos.map((todo) => todo.id);
     todos.forEach((todo) => {

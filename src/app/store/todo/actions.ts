@@ -23,7 +23,6 @@ void,
         throw new Error(`HTTP error! status: ${response.status}`);
       }
       const data = await response.json();
-      console.log('fetchTodos', data);
       return { todos: data as Todo[] };
     } catch (err) {
       if (err instanceof Error) {
