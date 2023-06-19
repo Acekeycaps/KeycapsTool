@@ -1,19 +1,10 @@
 'use client';
 
 import Image from 'next/image';
-import { Provider } from 'react-redux';
-import { useEffect } from 'react';
-import {
-  store, dispatch,
-} from './store';
 import { useAppSelector } from './hooks';
 
-function Home() {
+export default function Home() {
   const todo = useAppSelector((state) => state.todo);
-
-  useEffect(() => {
-    dispatch.fetchTodosAction();
-  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -123,13 +114,5 @@ function Home() {
         </a>
       </div>
     </main>
-  );
-}
-
-export default function HomeWrapper() {
-  return (
-    <Provider store={store}>
-      <Home />
-    </Provider>
   );
 }

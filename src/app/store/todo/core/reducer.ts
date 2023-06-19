@@ -3,7 +3,7 @@ import { initialState } from './store';
 import {
   add, remove, update,
 } from './actions';
-import { FetchTodos } from '../thunks';
+import { fetchTodos } from '../thunks';
 
 // const add : CoreReducerDraft<AddActionPayload> = ;
 
@@ -46,7 +46,7 @@ const updateReducer = createReducer(initialState, (builder) => {
 
 const fetchReducer = createReducer(initialState, (builder) => {
   // when fulfiled
-  builder.addCase(FetchTodos.fulfilled, (state, action) => {
+  builder.addCase(fetchTodos.fulfilled, (state, action) => {
     const { todos } = action.payload;
     state.todos.clear();
     state.ids = todos.map((todo) => todo.id);

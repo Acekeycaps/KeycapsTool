@@ -10,7 +10,7 @@ export type FetchTodoRejectedPayload = {
   err: Error
 };
 
-export const FetchTodos = createAsyncThunk<
+export const fetchTodos = createAsyncThunk<
 FetchTodoFulfiledPayload,
 void,
 { rejectValue: FetchTodoRejectedPayload }
@@ -31,5 +31,5 @@ void,
 );
 
 export default {
-  FetchTodos,
+  fetchTodos,
 };
