@@ -1,7 +1,7 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { setError, setLoading } from './actions';
 import { initialState } from './store';
-import { fetchTodos } from '../thunks';
+import { fetchTodos } from '../actions';
 
 const setLoadingReducer = createReducer(initialState, (builder) => {
   builder.addCase(setLoading, (state, action) => {

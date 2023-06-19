@@ -6,11 +6,13 @@ export type Todo = {
 };
 
 export type TodoCore = {
-  todos: Map<Todo['id'], Todo>,
+  todos: {
+    [K in Todo['id']]: Todo;
+  };
   ids: Array<Todo['id']>
 };
 
 export const initialState: TodoCore = {
-  todos: new Map(),
+  todos: {},
   ids: [],
 };

@@ -1,7 +1,7 @@
 import { combineReducers } from '@reduxjs/toolkit';
 import core from './core';
 import status from './status';
-import { fetchTodos } from './thunks';
+import Actions from './actions';
 
 const reducer = combineReducers({
   core: core.reducer,
@@ -11,7 +11,7 @@ const reducer = combineReducers({
 const actions = {
   core: core.actions,
   status: status.actions,
-  fetchTodo: fetchTodos,
+  ...Actions,
 };
 
 export default {

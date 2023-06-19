@@ -19,7 +19,8 @@ const TodoCounts: React.FC = () => {
   const todosCount = useSelector(selectTodoCounts);
 
   useEffect(() => {
-    dispatch(appStore.actions.todo.fetchTodo());
+    console.log('123');
+    dispatch(appStore.actions.todo.fetchTodos());
   }, [dispatch]);
 
   return <p>{todosCount}</p>;
