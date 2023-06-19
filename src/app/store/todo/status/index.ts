@@ -1,14 +1,7 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { initialState } from './store';
-import reducers from './reducer';
-
-const slice = createSlice({
-  name: 'status',
-  initialState,
-  reducers,
-});
+import reducer from './reducer';
+import actions from './actions';
 
 export default {
-  actions: slice.actions,
-  reducer: slice.reducer,
+  actions,
+  reducer,
 };

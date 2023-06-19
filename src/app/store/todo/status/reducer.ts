@@ -3,23 +3,15 @@ import { setError, setLoading } from './actions';
 import { initialState } from './store';
 import { fetchTodos } from '../actions';
 
-const setLoadingReducer = createReducer(initialState, (builder) => {
+const reducer = createReducer(initialState, (builder) => {
   builder.addCase(setLoading, (state, action) => {
     state.loading = action.payload.loading;
   });
-});
 
-const setErrorReducer = createReducer(initialState, (builder) => {
   builder.addCase(setError, (state, action) => {
     state.error = action.payload.error;
   });
-});
 
-/**
- * Extra Reducers
- * Response to the FetchTodo action
- */
-const fetchReducer = createReducer(initialState, (builder) => {
   // when pending
   builder.addCase(fetchTodos.pending, (state) => {
     state.loading = 'pending';
@@ -36,8 +28,4 @@ const fetchReducer = createReducer(initialState, (builder) => {
   });
 });
 
-export default {
-  setLoadingReducer,
-  setErrorReducer,
-  fetchReducer,
-};
+export default reducer;

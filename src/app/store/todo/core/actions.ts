@@ -1,7 +1,7 @@
 import { createAction } from '@reduxjs/toolkit';
 import { Todo } from './store';
 import {
-  ADD_TODO, DELETE_TODO, RESET_TODOS, UPDATE_TODO,
+  ADD_TODO, DELETE_TODO, UPDATE_TODO,
 } from '../../actions.type';
 
 export type AddActionPayload = {
@@ -19,7 +19,13 @@ export type UpdateActionPayload = {
 };
 export const update = createAction<UpdateActionPayload>(UPDATE_TODO);
 
-export type ResetActionPayload = {
-  todos: Todo[]
+// export type ResetActionPayload = {
+//   todos: Todo[]
+// };
+// export const reset = createAction<ResetActionPayload>(RESET_TODOS);
+
+export default {
+  add,
+  remove,
+  update,
 };
-export const reset = createAction<ResetActionPayload>(RESET_TODOS);

@@ -11,3 +11,8 @@ export type SetErrorActionPayload = {
   error: TodoStatus['error']
 };
 export const setError = createAction<SetErrorActionPayload>(SET_TODO_ERROR);
+
+export default {
+  setLoading,
+  setError,
+};

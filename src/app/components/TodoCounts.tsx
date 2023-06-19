@@ -6,7 +6,7 @@ import { createSelector } from '@reduxjs/toolkit';
 import appStore from '../store';
 import { RootState } from '../containers/RootStore';
 
-import type {} from 'redux-thunk/extend-redux';
+import type { } from 'redux-thunk/extend-redux';
 
 // calculated state
 const selectTodoCounts = createSelector(
@@ -22,6 +22,8 @@ const TodoCounts: React.FC = () => {
     console.log('123');
     dispatch(appStore.actions.todo.fetchTodos());
   }, [dispatch]);
+
+  console.log('123', todosCount);
 
   return <p>{todosCount}</p>;
 };
